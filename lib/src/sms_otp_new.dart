@@ -17,7 +17,18 @@ class SmsOtp extends StatefulWidget {
       this.phoneNumberColor,
       this.phoneNumberFontSize,
       this.pinHeight = 68.0,
-      this.pinWidth = 64.0})
+      this.pinWidth = 64.0,
+      this.btnMargin = 40,
+      required this.btnOnPressed,
+      this.btnText = "Enter",
+      this.btnTextColor,
+      this.btnTextFontSize,
+      this.durationTimeMargin = 40,
+      this.durationTime = 3,
+      required this.durationTimeOnEnd,
+      this.durationTimeTextColor,
+      this.durationTimeTextFontWeight,
+      this.durationTimeTextFontSize})
       : super(key: key);
 
   final String title;
@@ -34,6 +45,17 @@ class SmsOtp extends StatefulWidget {
   final double? phoneNumberFontSize;
   final double pinHeight;
   final double pinWidth;
+  final double btnMargin;
+  final Function btnOnPressed;
+  final String btnText;
+  final Color? btnTextColor;
+  final double? btnTextFontSize;
+  final double durationTimeMargin;
+  final int durationTime;
+  final Function durationTimeOnEnd;
+  final Color? durationTimeTextColor;
+  final FontWeight? durationTimeTextFontWeight;
+  final double? durationTimeTextFontSize;
 
   @override
   SmsOtpState createState() => SmsOtpState();
@@ -155,6 +177,42 @@ class SmsOtpState extends State<SmsOtp> {
             )
           ],
         )),
+        Container(
+          margin: EdgeInsets.symmetric(vertical: widget.btnMargin),
+          child: TextButton(
+            onPressed: () {
+              widget.btnOnPressed;
+            },
+            child: Text(
+              widget.btnText,
+              style: TextStyle(
+                  color: widget.btnTextColor ?? Colors.black,
+                  fontSize: widget.btnTextFontSize ?? 18),
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(vertical: widget.durationTimeMargin),
+          child: TweenAnimationBuilder<Duration>(
+              duration: Duration(minutes: widget.durationTime),
+              tween: Tween(
+                  begin: Duration(minutes: widget.durationTime),
+                  end: Duration.zero),
+              onEnd: () {
+                widget.durationTimeOnEnd;
+              },
+              builder: (BuildContext context, Duration value, Widget? child) {
+                final minutes = value.inMinutes;
+                final seconds = value.inSeconds % 60;
+                return Text('$minutes:$seconds',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                        color: widget.durationTimeTextColor ?? Colors.black,
+                        fontWeight: widget.durationTimeTextFontWeight ??
+                            FontWeight.bold,
+                        fontSize: widget.durationTimeTextFontSize ?? 30));
+              }),
+        ),
       ],
     );
   }

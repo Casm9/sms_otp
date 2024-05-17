@@ -1,6 +1,6 @@
 name: sms_otp
 description: A package for sms OTP container that you can modify variables.
-version: 0.0.2
+version: 0.0.4
 homepage: https://github.com/Casm9/sms_otp
 repository: https://github.com/Casm9/sms_otp.git
 
