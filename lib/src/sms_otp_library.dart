@@ -67,6 +67,8 @@ class SmsOtpState extends State<SmsOtp> {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             widget.title,
