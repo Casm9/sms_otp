@@ -1,3 +1,3 @@
 library sms_otp;
 
-export 'src/sms_otp_new.dart';
+export 'src/sms_otp_library.dart';
